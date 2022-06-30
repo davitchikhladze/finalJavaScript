@@ -132,20 +132,20 @@ export class MyElement extends LitElement {
     this.postBody = post;
   }
 
-  postTweet(){
+postTweet(){
     let tweet = {
       name : this.name,
       post: this.postBody
     }
     saveToStorage(tweet).then((tweets) => {
-      this.tweets.push(tweet);
-      this.postCount = tweets.length
+      this.tweets = loadFromStorage()
+      this.postCount = this.tweets.length
     });          
   }
   DeleteTweet(index){
-    deleteFromStorage(index).then((e) => {    
-      this.tweets.splice(index,1)
-      this.postCount--;          
+    deleteFromStorage(index).then((e) => { 
+      this.tweets = loadFromStorage()
+      this.postCount = this.tweets.length        
     });
   }
 
